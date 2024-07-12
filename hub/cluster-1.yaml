@@ -6,9 +6,34 @@ metadata:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
+  name: pre-config-tenants
+  namespace: cluster-1
+spec:
+  interval: 1h
+  retryInterval: 3m
+  timeout: 5m
+  prune: true
+  wait: true
+  path: ./tenants/cluster-1
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  kubeConfig:
+    secretRef:
+      name: cluster-kubeconfig
+  postBuild:
+    substitute:
+      CLUSTER_NAME: cluster-1
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
   name: tenants
   namespace: cluster-1
 spec:
+  dependsOn:
+    - name: pre-config-tenants
   interval: 1h
   retryInterval: 3m
   timeout: 5m
