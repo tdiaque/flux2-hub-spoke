@@ -15,7 +15,7 @@ metadata:
   name: team-1
   namespace: cluster-1
 spec:
-  serviceAccountName: dev-team
+  serviceAccountName: team-1
   interval: 5m
   sourceRef:
     kind: GitRepository
