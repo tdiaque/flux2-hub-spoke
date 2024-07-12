@@ -17,8 +17,8 @@ spec:
   path: ./tenants/cluster-1
   sourceRef:
     kind: GitRepository
-    name: flux-system
-    namespace: flux-system
+    name: team-1
+    namespace: cluster-1
   kubeConfig:
     secretRef:
       name: cluster-kubeconfig
