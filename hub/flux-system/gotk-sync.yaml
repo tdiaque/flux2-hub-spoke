@@ -36,6 +36,8 @@ spec:
   url: https://github.com/tdiaque/tenant1.git
   ref:
     branch: team-1
+  secretRef:
+    name: team-1-auth
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
