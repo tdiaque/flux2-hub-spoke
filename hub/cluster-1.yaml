@@ -1,20 +1,20 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: staging
+  name: cluster-1
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: tenants
-  namespace: staging
+  namespace: cluster-1
 spec:
   interval: 1h
   retryInterval: 3m
   timeout: 5m
   prune: true
   wait: true
-  path: ./clusters/staging/tenants
+  path: ./clusters/cluster-1/tenants
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -24,23 +24,23 @@ spec:
       name: cluster-kubeconfig
   postBuild:
     substitute:
-      CLUSTER_NAME: staging
+      CLUSTER_NAME: cluster-1
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: infra-controllers
-  namespace: staging
+  namespace: cluster-1
 spec:
   dependsOn:
     - name: tenants
-  targetNamespace: staging
+  targetNamespace: cluster-1
   interval: 1h
   retryInterval: 3m
   timeout: 5m
   prune: true
   wait: true
-  path: ./clusters/staging/infra-controllers
+  path: ./clusters/cluster-1/infra-controllers
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -59,17 +59,17 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: infra-configs
-  namespace: staging
+  namespace: cluster-1
 spec:
   dependsOn:
     - name: infra-controllers
-  targetNamespace: staging
+  targetNamespace: cluster-1
   interval: 1h
   retryInterval: 3m
   timeout: 5m
   prune: true
   wait: true
-  path: ./clusters/staging/infra-configs
+  path: ./clusters/cluster-1/infra-configs
   sourceRef:
     kind: GitRepository
     name: flux-system
@@ -82,17 +82,17 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: apps
-  namespace: staging
+  namespace: cluster-1
 spec:
   dependsOn:
     - name: infra-configs
-  targetNamespace: staging
+  targetNamespace: cluster-1
   interval: 1h
   retryInterval: 3m
   timeout: 5m
   prune: true
   wait: true
-  path: ./clusters/staging/apps
+  path: ./clusters/cluster-1/apps
   sourceRef:
     kind: GitRepository
     name: flux-system
