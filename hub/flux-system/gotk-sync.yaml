@@ -33,7 +33,7 @@ metadata:
   namespace: cluster-1
 spec:
   interval: 1m
-  url: https://github.com/tdiaque/tenant1
+  url: https://github.com/tdiaque/tenant1.git
   ref:
     branch: team-1
 ---
