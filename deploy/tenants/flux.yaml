@@ -35,3 +35,27 @@ subjects:
   - kind: ServiceAccount
     name: flux-cluster-admin
     namespace: "${CLUSTER_NAME}"
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: team-1
+  namespace: cluster-1
+spec:
+  interval: 1m
+  url: https://github.com/tdiaque/tenant1
+  ref:
+    branch: team-1
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: team-1
+  namespace: cluster-1
+spec:
+  serviceAccountName: team-1
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: team-1
+  prune: true
