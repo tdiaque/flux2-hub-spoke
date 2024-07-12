@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: podinfo
   labels:
-    toolkit.fluxcd.io/tenant: dev-team
+    toolkit.fluxcd.io/tenant: dev-team-this-is-test
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
