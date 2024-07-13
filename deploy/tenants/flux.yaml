@@ -35,3 +35,4 @@ subjects:
   - kind: ServiceAccount
     name: flux-cluster-admin
     namespace: "${CLUSTER_NAME}"
+---
